@@ -51,11 +51,12 @@ public class SimpleJDBCRepository {
             ps = connection.prepareStatement(findUserByIdSQL);
             ps.setLong(1, userId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
+            if(rs.next()){
             return new User(rs.getLong(1),rs.getString(2), rs.getString(3), rs.getInt(4));
-        } catch (SQLException e) {
+        }} catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     public User findUserByName(String userName) {
