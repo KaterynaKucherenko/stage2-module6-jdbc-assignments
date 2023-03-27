@@ -30,8 +30,8 @@ public class SimpleJDBCRepository {
 
     public Long createUser(User user) {
         Long id = null;
-        try(Connection connection1 = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection1.prepareStatement(createUserSQL,PreparedStatement.RETURN_GENERATED_KEYS)){
+        try(Connection con = dataSource.getConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(createUserSQL,PreparedStatement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setInt(3, user.getAge());
