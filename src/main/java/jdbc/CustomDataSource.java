@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.FileReader;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,26 +23,27 @@ public class CustomDataSource implements DataSource {
     private final String password;
 
     private CustomDataSource(String driver, String url, String password, String name) {
-        this.driver=driver;
-        this.url=url;
-        this.password=password;
-        this.name=name;
+        this.driver = driver;
+        this.url = url;
+        this.name = name;
+        this.password  = password;
+
     }
 
     public static CustomDataSource getInstance() {
-        if (instance==null){
+        if(instance == null){
             try{
-                Properties prop = new Properties();
-                prop.load(CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties"));
-                instance=new CustomDataSource(
-                        prop.getProperty("postgres.driver"),
-                        prop.getProperty("postgres.url"),
-                        prop.getProperty("postgres.password"),
-                        prop.getProperty("postgres.name")
+                Properties properties = new Properties();
+                properties.load(CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties"));
+                //properties.load(new FileReader("app.properties"));
+                instance= new CustomDataSource(
+                        properties.getProperty("postgres.driver"),
+                        properties.getProperty("postgres.url"),
+                        properties.getProperty("postgres.password"),
+                        properties.getProperty("postgres.name")
                 );
-
             }
-            catch (Exception e){
+            catch ( Exception e){
                 e.printStackTrace();
             }
         }
@@ -52,12 +52,12 @@ public class CustomDataSource implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        return new CustomConnector().getConnection(url,name, password);
+        return new CustomConnector().getConnection(url,name,password);
     }
 
     @Override
     public Connection getConnection(String username, String password) throws SQLException {
-        return new CustomConnector().getConnection(url,username, password);
+        return new CustomConnector().getConnection(url,username,password);
     }
 
     @Override

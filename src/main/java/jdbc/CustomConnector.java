@@ -9,18 +9,20 @@ public class CustomConnector {
         try{
             return DriverManager.getConnection(url);
         }
-        catch (SQLException e){
+        catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
 
     public Connection getConnection(String url, String user, String password)  {
-        try {
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
+        try{
+            return DriverManager.getConnection(url,user,password);
+        }
+        catch (SQLException e){
             e.printStackTrace();
             return null;
         }
+
     }
 }
