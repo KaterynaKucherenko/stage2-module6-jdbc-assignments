@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class CustomConnector {
     public Connection getConnection(String url) {
-        try{ Connection con1 = DriverManager.getConnection(url);
-            return con1;
+        try{
+            return DriverManager.getConnection(url);
     }
         catch (SQLException e){
             e.getErrorCode();
@@ -15,10 +15,9 @@ public class CustomConnector {
         }}
 
 
-    public Connection getConnection(String url, String user, String password) throws SQLException {
+    public Connection getConnection(String url, String user, String password) {
         try {
-            Connection con = DriverManager.getConnection(url, user, password);
-            return con;
+            return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             e.getErrorCode();
             return null;
