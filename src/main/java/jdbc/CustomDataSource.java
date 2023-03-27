@@ -37,8 +37,8 @@ public class CustomDataSource implements DataSource {
                 prop.load(CustomDataSource.class.getClassLoader().getResourceAsStream("app.properties"));
                 instance=new CustomDataSource(
                         prop.getProperty("postgres.driver"),
-                        prop.getProperty("postgres.password"),
                         prop.getProperty("postgres.url"),
+                        prop.getProperty("postgres.password"),
                         prop.getProperty("postgres.name")
                 );
 
