@@ -38,8 +38,8 @@ public class CustomDataSource implements DataSource {
                 //properties.load(new FileReader("app.properties"));
                 instance= new CustomDataSource(
                         properties.getProperty("postgres.driver"),
-                        properties.getProperty("postgres.url"),
-                        properties.getProperty("postgres.password"),
+
+                        properties.getProperty("postgres.password"),properties.getProperty("postgres.url"),
                         properties.getProperty("postgres.name")
                 );
             }
